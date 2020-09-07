@@ -1,0 +1,36 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">App Demo</a>
+</nav>
+
+<!-- Navegacion -->
+<div class="container-fluid mt-5">
+  <div class="row">
+    <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register-customer" routerLinkActive="active">
+              <i class="fas fa-plus"></i> Registrar Cliente
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/view-customers" routerLinkActive="active">
+              <i class="fas fa-list-ul"></i> Lista de Clientes
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="inner-adjust">
+        <!-- Rutas definidas en AppRouting -->
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+
+  </div>
+</div>

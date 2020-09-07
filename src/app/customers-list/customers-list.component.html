@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Clientes Registrados</h1>
+    <!-- Mostrar si no hay informacion -->
+    <a routerLink="/register-customer" class="btn btn-success" *ngIf="hideWhenNoCustomer">
+      <i class="fas fa-plus custom-fa-plus"></i>
+      Agregar Cliente
+    </a>
+  </div>
+  
+  <div class="pricing-header mx-auto">
+  
+    <!-- Animacion de carga antes de comenzar-->
+    <div class="no-data text-center" *ngIf="preLoader">
+      <img src="assets/preloader.gif" class="preloader-icon" alt="No customer">
+    </div>
+  
+    <!-- Imagen para cuando no hay datos -->
+    <div class="no-data text-center" *ngIf="noData">
+      <img src="assets/no-data.png" class="nodata-msg" alt="No customer">
+      <p class="nodata-msg">Todavia no se registra nada!</p>
+      <a routerLink="/register-customer" class="btn btn-success">
+        <i class="fas fa-plus custom-fa-plus"></i>
+        Agregar Cliente
+      </a>
+    </div>
+  
+    <!-- Mostrar la tabla con la informacion -->
+    <div class="table-responsive" *ngIf="hideWhenNoCustomer">
+      <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+        <thead>
+          <tr>
+            <th scope="col">Cliente ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th class="text-center" scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Iteracion de la lista de clientes -->
+          <tr *ngFor="let customer of Customer | paginate: { itemsPerPage: 5, currentPage: p }; let i = index;">
+            <th>
+              <label *ngIf="customer.customerState == 'true'" style="color: green;">
+                {{customer.$key}}
+              </label>
+              <label *ngIf="customer.customerState == 'false'" style="color: red;">
+                {{customer.$key}}
+              </label>
+            </th>
+
+            <td>{{customer.firstName}} {{customer.lastName}}</td>
+            <td>{{customer.email}}</td>
+            <td class="text-center action-block">
+              
+              <a routerLink="/edit-customer/{{customer.$key}}" class="btn btn-success mr-2">
+                <i class="far fa-edit"></i>
+                Editar
+              </a>
+
+              <a (click)="deleteCustomer(customer)" class="btn btn-danger text-white">
+                <i class="far fa-trash-alt"></i>
+                Eliminar
+              </a>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>
+  
+  </div>
